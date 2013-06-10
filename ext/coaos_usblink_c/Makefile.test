@@ -1,0 +1,22 @@
+OPTS=-D__link -I./include -D__macosx
+
+all: connect
+
+connect: link_phy.o link.o link_protocol_master.o link_protocol.o link_file.o
+	clang -o connect connect.o link.o link_phy_posix.o link_protocol_master.o link_protocol.o link_file.o
+
+link_phy.o: link_phy.c
+	clang $(OPTS) -c link_phy.c
+
+link.o: link.c
+	clang $(OPTS) -c link.c
+	
+link_file.o: link_file.c
+	clang $(OPTS) -c link_file.c
+	
+link_protocol_master.o: link_protocol_master.c
+	clang $(OPTS) -c link_protocol_master.c
+	
+link_protocol.o: link_protocol.c
+	clang $(OPTS) -c link_protocol.c
+
